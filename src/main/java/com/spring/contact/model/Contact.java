@@ -1,12 +1,30 @@
 package com.spring.contact.model;
 
+import org.hibernate.validator.constraints.Length;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+
 public class Contact {
 
 	private Integer id;
+
+	@NotBlank(message = "Name Must Not Be Blank")
 	private String name;
+
+	@NotBlank(message = "Email Must Not Be Blank")
+	@Email(message = "Enter Valid Email")
 	private String email;
+
+	@NotBlank(message = "Address Must Not Be Blank")
 	private String address;
+
+	@NotBlank(message = "Phone Must Not Be Blank")
+	@Length(min = 11, max = 11, message = "Phone Number Must Be 11 Digits")
 	private String phone;
+
+	public Contact() {}
+
 
 	public Contact(Integer id, String name, String email, String address, String phone) {
 		this(name, email, address, phone);
@@ -59,4 +77,9 @@ public class Contact {
 		this.phone = phone;
 	}
 
+	@Override
+	public String toString() {
+		return "Contact [id=" + id + ", name=" + name + ", email=" + email + ", address=" + address + ", phone="
+				+ phone + "]";
+	}
 }

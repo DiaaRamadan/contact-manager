@@ -20,8 +20,8 @@ import com.spring.contact.dao.ContactDaoImp;
 public class MvcConfig implements WebMvcConfigurer {
 
 	@Bean
-	public DataSource getDateSource() {
-		var dataSource = new DriverManagerDataSource();
+	public DataSource getDataSource() {
+		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
 		dataSource.setUrl("jdbc:mysql://localhost:3366/contactdb");
 		dataSource.setUsername("root");
@@ -31,7 +31,7 @@ public class MvcConfig implements WebMvcConfigurer {
 	
 	@Bean
 	public ViewResolver getViewResolver() {
-		var resolver = new InternalResourceViewResolver();
+		InternalResourceViewResolver resolver = new InternalResourceViewResolver();
 		resolver.setPrefix("/WEB-INF/views/");
 		resolver.setSuffix(".jsp");
 		return resolver;
@@ -39,7 +39,7 @@ public class MvcConfig implements WebMvcConfigurer {
 	
 	@Bean
 	public ContactDao getContactDao() {
-		return new ContactDaoImp(getDateSource());
+		return new ContactDaoImp(getDataSource());
 	}
 	
 }

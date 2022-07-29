@@ -15,7 +15,7 @@ import org.springframework.stereotype.Repository;
 import com.mysql.jdbc.RowData;
 import com.spring.contact.model.Contact;
 
-@Repository
+
 public class ContactDaoImp implements ContactDao {
 
 	private JdbcTemplate jdbcTemplate;
