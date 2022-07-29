@@ -15,6 +15,7 @@
     <h1>New/Edit Contact</h1>
     <table style="margin: auto">
         <form:form method="post" action="save" modelAttribute="contact">
+            <form:hidden path="id" />
             <tr>
                 <td>Name:</td>
                 <td><form:input path="name"/></td>

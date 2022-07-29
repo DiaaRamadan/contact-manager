@@ -50,23 +50,17 @@ public class ContactDaoImp implements ContactDao {
 
 		String sql = "SELECT * FROM contacts WHERE contact_id = " + id;
 
-		ResultSetExtractor<Contact> extractor = new ResultSetExtractor<Contact>() {
+		ResultSetExtractor<Contact> extractor = rs -> {
 
-			@Override
-			public Contact extractData(ResultSet rs) throws SQLException, DataAccessException {
-
-				if (rs.next()) {
-					String name = rs.getString("name");
-					String email = rs.getString("email");
-					String address = rs.getString("address");
-					String phone = rs.getString("phone");
-					;
-					return new Contact(name, email, address, phone);
-				}
-
-				return null;
+			if (rs.next()) {
+				String name = rs.getString("name");
+				String email = rs.getString("email");
+				String address = rs.getString("address");
+				String phone = rs.getString("phone");
+				return new Contact(id, name, email, address, phone);
 			}
 
+			return null;
 		};
 
 		return jdbcTemplate.query(sql, extractor);

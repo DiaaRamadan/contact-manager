@@ -10,6 +10,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
@@ -41,7 +42,24 @@ public class MainController {
 			mv.addObject("contact", contact);
 			return mv;
 		}
-		contactDao.save(contact);
+		if (contact.getId() == null || contact.getId() == 0) {
+			contactDao.save(contact);
+		} else {
+			contactDao.update(contact);
+		}
+		return new ModelAndView("redirect:/");
+	}
+
+	@RequestMapping(value = "/edit", method = RequestMethod.GET)
+	public ModelAndView editContact(@RequestParam("id") int id) {
+		ModelAndView mv = new ModelAndView("contact_form");
+		mv.addObject("contact", contactDao.get(id));
+		return mv;
+	}
+
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	public ModelAndView deleteContact(@RequestParam("id") int id) {
+		contactDao.delete(id);
 		return new ModelAndView("redirect:/");
 	}
 }

@@ -23,6 +23,7 @@
             <th scope="col">Email</th>
             <th scope="col">Address</th>
             <th scope="col">Phone</th>
+            <th scope="col">Action</th>
         </tr>
         </thead>
         <tbody>
@@ -33,6 +34,9 @@
                 <td>${contact.email}</td>
                 <td>${contact.address}</td>
                 <td>${contact.phone}</td>
+                <td>
+                    <a href="edit?id=${contact.id}">Edit</a>
+                    <a href="delete?id=${contact.id}">Delete</a>
             </tr>
         </c:forEach>
         </tbody>
